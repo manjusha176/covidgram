@@ -1,0 +1,9 @@
+{"type":"FeatureCollection",
+"features":[
+{"type":"Feature","properties":{"sev":"low", "symp": "body ache"},"geometry":{"type":"Point","coordinates":[ -71.198823, 42.511415]}},
+{"type":"Feature","properties":{"sev":"low", "symp": "cough"},"geometry":{"type":"Point","coordinates":[-71.200663, 42.509864]}},
+{"type":"Feature","properties":{"sev":"high", "symp": "cough, fever"},"geometry":{"type":"Point","coordinates":[-71.200663, 42.509864]}},
+{"type":"Feature","properties":{"sev":"high", "symp": "difficulty in breathing"},"geometry":{"type":"Point","coordinates":[-71.196929, 42.509065]}},
+{"type":"Feature","properties":{"sev":"high", "symp": "difficulty in breathing, low oxygen"},"geometry":{"type":"Point","coordinates":[-71.192043, 42.502008]}},
+{"type":"Feature","properties":{"sev":"medium", "symp": "difficulty in breathing, low oxygen"},"geometry":{"type":"Point","coordinates":[-71.192043, 42.502008]}}
+]}
