@@ -5,3 +5,10 @@ management:
 server:
   servlet:
     contextPath: /covidgram
+
+    
+spring:
+  mvc:
+   view:
+    prefix: /WEB-INF/jsp/
+    suffix: .jsp

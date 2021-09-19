@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * The main controller handling the runtime requests.
  */
-@RestController
+@Controller
 @Slf4j
 public class CovidgramController {
     
@@ -28,7 +28,7 @@ public class CovidgramController {
 	private CovidgramService covidgramService;
 	
     @RequestMapping(value = "/start", method={RequestMethod.POST, RequestMethod.GET})
-    public ResponseEntity<String> start(
+    public String start(
     		HttpServletRequest request,
             HttpSession httpSession,
             Model model,
@@ -47,10 +47,11 @@ public class CovidgramController {
 			
 			log.error("Error {} ", e.getMessage());
 			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(null);
+			return "error_vxml";
 		}
     	
-    	return ResponseEntity.ok().body("Data sent to heatmap successfully..");
+    	//return ResponseEntity.ok().body("Data sent to heatmap successfully..");
+    	return "vxml_base";
     }
 
 }

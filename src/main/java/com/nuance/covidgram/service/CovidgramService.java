@@ -34,9 +34,9 @@ public class CovidgramService {
 	}
 
 	private List<Double> getLocationCoordinates(String location) {
-		if (location.equalsIgnoreCase("Marrett Rd")) {
+		if (location.equalsIgnoreCase("Marrett Road")) {
 			return Arrays.asList(-71.207190, 42.496503);
-		} else if (location.equalsIgnoreCase("Spring Valley Rd")) {
+		} else if (location.equalsIgnoreCase("Spring Valley Road")) {
 			return Arrays.asList(-71.185384, 42.520258);
 		} else {
 			return Arrays.asList(-71.191587, 42.525692);

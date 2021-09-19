@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE grammar>
+
+<!--
+  Copyright 2003-2004 ScanSoft, Inc.
+  All Rights Reserved
+  
+  CustomContext DTMF Grammar
+-->
+  
+<grammar xml:lang="en-US" mode="dtmf" version="1.0" root="___ROOT___">
+  <rule id="___ROOT___" scope="public">
+     <one-of>
+		<item tag="dm_root='Pay my visa card from my checking account tomorrow for thirty dollars';dm_confirmation_mode='NEVER';dm_confirm_string='Pay my visa card from my checking account tomorrow for thirty dollars';">1</item>
+		<item tag="dm_root='Pay from my checking account tomorrow for thirty dollars';dm_confirmation_mode='NEVER';dm_confirm_string='Pay from my checking account tomorrow for thirty dollar';">2</item>
+		<item tag="dm_root='visa card';dm_confirmation_mode='NEVER';dm_confirm_string='visa card';">3</item>
+    </one-of>
+  </rule>
+</grammar>
