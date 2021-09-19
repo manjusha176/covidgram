@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE vxml PUBLIC "-//Nuance/DTD VoiceXML 2.0//EN" "http://voicexml.nuance.com/dtd/nuancevoicexml-2-0.dtd">
+<vxml version="2.0" xmlns="http://www.w3.org/2001/vxml">
+   <var name="symptom"/>
+   <var name="severity"/>
+   <var name="location"/>
+ 
+  <form id="get_patient_info">
+	<block>
+	 <prompt> Welcome to CovidGram Emergency Helpline </prompt>
+	<prompt>We now need your details such as symptoms, severity and location </prompt>
+	</block>
+	<field name="symptom_type">
+		<prompt>What are your symptoms?</prompt>
+		
+		<!-- This is an inline grammar. -->
+		<grammar type="application/srgs+xml" root="r2" version="1.0">
+			<rule id="r2" scope="public">
+				<one-of>
+					<item>Cough</item>
+					<item>Cold</item>
+					<item>fever</item>
+					<item>cough and cold </item>
+					<item>cold and fever </item>
+				</one-of>
+			</rule>
+			
+		</grammar>
+		<nomatch>
+			<assign name="symptom" expr="'cold and fever'"/>
+			<goto next="#serv"/>
+		</nomatch>
+		<help> Please say cold, fever, or Cough.</help>
+		<filled>
+			<assign name="symptom" expr="symptom_type$.utterance"/>
+			<goto next="#serv"/>
+		</filled>	
+	</field>
+	</form>
+	<form id="serv">
+	<field name="severity_type">
+		<prompt>What is severity?</prompt>
+		<!-- This is an inline grammar. -->
+		<grammar type="application/srgs+xml" root="sev-rule" version="1.0">
+			<rule id="sev-rule" scope="public">
+				<one-of>
+					<item>High</item>
+					<item>Low</item>
+					<item>Medium</item>
+				</one-of>
+			</rule>
+		</grammar>
+		<help> Please say High, Medium, or Low.</help>
+		<nomatch>
+			<assign name="severity" expr="'high'"/>
+			<goto next="#loc"/>
+		</nomatch>
+		<filled>
+			<assign name="severity" expr="severity_type$.utterance"/>
+			<goto next="#loc"/>
+		</filled>	
+	</field>
+	</form>
+	
+	<form id="loc">
+	<field name="location_name">
+		<prompt>What is your location in Burlington?</prompt>
+	
+		<!-- This is an inline grammar. -->
+		<grammar type="application/srgs+xml" root="loc-rule" version="1.0">
+			<rule id="loc-rule" scope="public">
+				<one-of> 
+					<item>Marrett Road</item>
+					<item>Spring Valley Road</item>
+					<item>Donald Road</item>
+				</one-of>
+			</rule>
+		</grammar>
+		<help> Please say Marrett Road or Spring Valley Road  or Donald Road.</help>
+		<nomatch>
+			<assign name="location" expr="'Marrett Road'"/>
+			<goto next="#process"/>
+		</nomatch>
+		<filled>
+			<assign name="location" expr="location_name$.utterance"/>
+			<goto next="#process"/>
+		</filled>
+	</field>
+	</form>
+	
+	<form id="process">
+	<block>
+		<prompt>Your emergency is <value expr="symptom"/></prompt>
+		<prompt>Your severity is <value expr="severity"/></prompt>
+		<prompt>Your location is <value expr="location"/></prompt>
+	
+	</block>
+	<subdialog name="mixapp" src="http://10.66.89.60:8080/covidgram/start" method="post" namelist="symptom severity location">
+		<filled>
+			<goto next="#exit"/>
+		</filled>
+	</subdialog>	
+        
+	
+	
+	
+  </form>
+  <form id="exit">
+	<block>
+		<prompt>Thank you for calling Covidgram Emergency. We will assign you bed shortly.</prompt>
+		
+	
+	</block>
+  </form>
+</vxml>
